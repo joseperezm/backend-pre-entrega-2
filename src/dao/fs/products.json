@@ -1,0 +1,112 @@
+[
+  {
+    "title": "Portátil Ultradelgado",
+    "description": "Potente portátil ultradelgado para trabajo y entretenimiento.",
+    "code": "PU001",
+    "price": 899.99,
+    "status": true,
+    "stock": 25,
+    "category": "Electrónicos",
+    "thumbnails": "portatil_ultradelgado.jpg",
+    "id": 1
+  },
+  {
+    "title": "Auriculares Inalámbricos",
+    "description": "Auriculares inalámbricos con cancelación de ruido.",
+    "code": "AI002",
+    "price": 129.95,
+    "status": true,
+    "stock": 40,
+    "category": "Electrónicos",
+    "thumbnails": "auriculares_inalambricos.jpg",
+    "id": 2
+  },
+  {
+    "title": "Cámara DSLR Profesional",
+    "description": "Cámara DSLR para fotógrafos profesionales.",
+    "code": "CP003",
+    "price": 1499.99,
+    "status": true,
+    "stock": 15,
+    "category": "Electrónicos",
+    "thumbnails": "camara_dslr_profesional.jpg",
+    "id": 3
+  },
+  {
+    "title": "Smart TV 4K",
+    "description": "Televisor inteligente con resolución 4K para una experiencia inmersiva.",
+    "code": "STV004",
+    "price": 799.99,
+    "status": true,
+    "stock": 30,
+    "category": "Electrónicos",
+    "thumbnails": "smart_tv_4k.jpg",
+    "id": 4
+  },
+  {
+    "title": "Robot Aspirador Inteligente",
+    "description": "Robot aspirador inteligente para mantener tu hogar limpio.",
+    "code": "RAI005",
+    "price": 349.5,
+    "status": true,
+    "stock": 20,
+    "category": "Hogar",
+    "thumbnails": "robot_aspirador_inteligente.jpg",
+    "id": 5
+  },
+  {
+    "title": "Teclado Mecánico para Gaming",
+    "description": "Teclado mecánico diseñado para gamers.",
+    "code": "TMG006",
+    "price": 89.99,
+    "status": true,
+    "stock": 50,
+    "category": "Electrónicos",
+    "thumbnails": "teclado_mecanico_gaming.jpg",
+    "id": 6
+  },
+  {
+    "title": "Mochila para Portátil",
+    "description": "Mochila resistente y cómoda para transportar tu portátil.",
+    "code": "MP007",
+    "price": 39.95,
+    "status": true,
+    "stock": 35,
+    "category": "Accesorios",
+    "thumbnails": "mochila_para_portatil.jpg",
+    "id": 7
+  },
+  {
+    "title": "Impresora Multifunción",
+    "description": "Impresora multifunción para casa u oficina.",
+    "code": "IMF008",
+    "price": 249.99,
+    "status": true,
+    "stock": 18,
+    "category": "Electrónicos",
+    "thumbnails": "impresora_multifuncion.jpg",
+    "id": 8
+  },
+  {
+    "title": "Altavoz Bluetooth Portátil",
+    "description": "Altavoz Bluetooth portátil con alta calidad de sonido.",
+    "code": "ABP009",
+    "price": 79.5,
+    "status": true,
+    "stock": 22,
+    "category": "Electrónicos",
+    "thumbnails": "altavoz_bluetooth_portatil.jpg",
+    "id": 9
+  },
+  {
+    "title": "Formulario",
+    "description": "Desde formulario",
+    "price": "120495",
+    "thumbnails": "desde_formulario.jpg",
+    "code": "214225",
+    "stock": "44",
+    "category": "Formulario",
+    "status": true,
+    "id": 10
+  }
+]
