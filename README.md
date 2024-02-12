@@ -1,4 +1,4 @@
-# Instrucciones de Implementación
+# Cambios realizados:
 
 ## Modificaciones en el Método GET /
 
