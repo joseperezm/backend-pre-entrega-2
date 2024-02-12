@@ -8,7 +8,6 @@ const renderProductos = (productos) => {
     const contenedorProductos = document.getElementById("contenedorProductos");
     contenedorProductos.innerHTML = "";
 
-
     productos.forEach(item => {
         const card = document.createElement("div");
         card.classList.add("card");
@@ -18,7 +17,6 @@ const renderProductos = (productos) => {
                 <p>Titulo ${item.title} </p>
                 <p>Precio ${item.price} </p>
                 <button type="button" class="btn btn-primary mt-2"> Eliminar Producto </button>
-        
         `;
         contenedorProductos.appendChild(card);
 
@@ -31,10 +29,6 @@ const renderProductos = (productos) => {
 const eliminarProducto = (id) => {
     socket.emit("eliminarProducto", id);
 }
-
-document.getElementById("btnEnviar").addEventListener("click", () => {
-    agregarProducto();
-});
 
 const agregarProducto = () => {
     const title = document.getElementById("title").value;
@@ -54,12 +48,18 @@ const agregarProducto = () => {
 
     // Función para agregar el prefijo 'uploads/' si no es una URL válida
     const ajustarThumbnail = (thumbnail) => {
-        if (esURL(thumbnail)) {
+        // Si el campo thumbnails está en blanco, retornar la URL por defecto
+        if (thumbnail.trim() === "") {
+            return "https://placehold.co/400"; // URL por defecto
+        } else if (esURL(thumbnail)) {
+            // Si es una URL válida, retornarla tal cual
             return thumbnail;
         } else {
+            // Si es un nombre de archivo, anteponer "uploads/"
             return `uploads/${thumbnail}`;
         }
     };
+    
 
     // Validación de campos obligatorios
     if (!title || !description || !code || !price || !stock || !category) {
@@ -80,3 +80,6 @@ const agregarProducto = () => {
     
     socket.emit("agregarProducto", producto);
 };
+
+// Evento de clic en el botón "Agregar producto"
+document.getElementById("btnEnviar").addEventListener("click", agregarProducto);
