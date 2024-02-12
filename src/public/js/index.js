@@ -50,7 +50,7 @@ const agregarProducto = () => {
     const ajustarThumbnail = (thumbnail) => {
         // Si el campo thumbnails está en blanco, retornar la URL por defecto
         if (thumbnail.trim() === "") {
-            return "https://placehold.co/400"; // URL por defecto
+            return "uploads/placeholder.jpg"; // URL por defecto
         } else if (esURL(thumbnail)) {
             // Si es una URL válida, retornarla tal cual
             return thumbnail;
