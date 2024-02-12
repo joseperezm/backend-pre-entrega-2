@@ -13,6 +13,7 @@ const renderProductos = (productos) => {
         const card = document.createElement("div");
         card.classList.add("card");
         card.innerHTML = `
+                <img src="${item.thumbnails}" class="card-img-top" alt="${item.title}">
                 <p>Id ${item._id} </p>
                 <p>Titulo ${item.title} </p>
                 <p>Precio ${item.price} </p>
@@ -43,7 +44,22 @@ const agregarProducto = () => {
     const code = document.getElementById("code").value;
     const stock = document.getElementById("stock").value;
     const category = document.getElementById("category").value;
-    const status = document.getElementById("status").value === "true"; // Esto permite capturar el valor elegido por el usuario
+    const status = document.getElementById("status").value === "true";
+
+    // Función para verificar si es una URL válida
+    const esURL = (texto) => {
+        const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+        return urlRegex.test(texto);
+    }
+
+    // Función para agregar el prefijo 'uploads/' si no es una URL válida
+    const ajustarThumbnail = (thumbnail) => {
+        if (esURL(thumbnail)) {
+            return thumbnail;
+        } else {
+            return `uploads/${thumbnail}`;
+        }
+    };
 
     // Validación de campos obligatorios
     if (!title || !description || !code || !price || !stock || !category) {
@@ -55,11 +71,11 @@ const agregarProducto = () => {
         title: title,
         description: description,
         price: parseFloat(price),
-        thumbnails: thumbnails, // Opcional, no se valida si está vacío
+        thumbnails: ajustarThumbnail(thumbnails), // Aplicar la función de ajuste al thumbnail
         code: code,
         stock: parseInt(stock),
         category: category,
-        status: status // Ahora se captura el valor seleccionado por el usuario, con "true" como valor por defecto.
+        status: status
     };
     
     socket.emit("agregarProducto", producto);
