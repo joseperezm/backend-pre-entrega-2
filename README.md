@@ -1,92 +1,48 @@
-## Cambios Realizados
+# Instrucciones de Implementación
 
-### 1. Modelo de Persistencia de MongoDB y Mongoose
+## Modificaciones en el Método GET /
 
-Se ha agregado el modelo de persistencia de MongoDB y Mongoose al proyecto para facilitar el almacenamiento de datos de manera más robusta.
+- **Objetivo**: Modificar el método `GET /` para soportar los siguientes parámetros opcionales:
+  - `limit`: Número máximo de elementos a devolver.
+    - Por defecto: 10.
+  - `page`: Número de página a consultar.
+    - Por defecto: 1.
+  - `sort`: Ordenamiento `asc` (ascendente) o `desc` (descendente) por precio.
+    - Sin ordenamiento por defecto.
+  - `query`: Filtro de búsqueda específico.
+    - Búsqueda general por defecto.
 
-### 2. Configuración de la Base de Datos
+- **Respuesta esperada**: Objeto con formato:
+  ```json
+  {
+    "status": "success/error",
+    "payload": "Resultado de los productos solicitados",
+    "totalPages": "Total de páginas",
+    "prevPage": "Página anterior",
+    "nextPage": "Página siguiente",
+    "page": "Página actual",
+    "hasPrevPage": "Indica si existe una página previa",
+    "hasNextPage": "Indica si existe una página siguiente",
+    "prevLink": "Link a la página previa (null si hasPrevPage=false)",
+    "nextLink": "Link a la página siguiente (null si hasNextPage=false)"
+  }
+  ```
 
-- Se ha creado una base de datos llamada "ecommerce" en Atlas.
-- Se han establecido las colecciones "carts", "messages", y "products" con sus respectivos esquemas en MongoDB.
+- **Búsqueda por categoría o disponibilidad**: Permitir filtrar productos por categoría o disponibilidad y ordenar los resultados por precio de manera ascendente o descendente.
 
-### 3. Reorganización de la Estructura de Carpetas
+## Nuevos Endpoints en Router de Carts
 
-- Los Managers de FileSystem se han separado de los Managers de MongoDB y se han colocado en una carpeta llamada "dao".
-- Se ha creado una carpeta "models" dentro de "dao" para albergar los esquemas de MongoDB.
+- `DELETE api/carts/:cid/products/:pid`: Elimina el producto seleccionado del carrito.
+- `PUT api/carts/:cid`: Actualiza el carrito con un arreglo de productos.
+- `PUT api/carts/:cid/products/:pid`: Actualiza la cantidad de un producto específico en el carrito.
+- `DELETE api/carts/:cid`: Elimina todos los productos del carrito.
+- **Nota**: Para el modelo de `Carts`, asegurarse de que el id de cada producto haga referencia al modelo de `Products` y utilizar "populate" para desglosar productos asociados.
 
-### 4. Integración de Managers en Carpeta "Dao"
+## Vistas en Router de Views
 
-- Todos los Managers, tanto de FileSystem como de MongoDB, ahora residen en la carpeta llamada "Dao" para una gestión más centralizada.
+- `/products`: Muestra todos los productos con paginación.
+  - Opciones de visualización:
+    1. Nueva vista con detalles completos del producto y opción de agregar al carrito.
+    2. Botón de "agregar al carrito" directamente en la lista de productos.
 
-### 5. Actualización de Servicios para Mongoose
-
-- Se han reajustado los servicios para que funcionen con Mongoose en lugar de FileSystem, manteniendo la compatibilidad con ambas tecnologías.
-
-### 6. Implementación de Vista de Chat en Handlebars
-
-- Se ha implementado una nueva vista llamada "chat.handlebars" utilizando Handlebars.
-- Los mensajes del chat se almacenan en la colección "messages" en MongoDB, siguiendo el formato {user: correoDelUsuario, message: mensajeDelUsuario}.
-
-### 7. Garantía de Integridad del Proyecto
-
-- Se ha corroborado la integridad del proyecto para asegurar que todas las funcionalidades anteriores sigan operativas.
-
-### Importante
-
-- FileSystem no ha sido eliminado del proyecto y sigue siendo compatible para garantizar la continuidad de las funcionalidades existentes.
-
-## Testeo (Mismo de primera pre-entrega)
-
-### Listar todos los productos
-- Método: `GET`
-- URL: `http://localhost:8080/api/products`
-- Verifica que la solicitud devuelva una lista de todos los productos.
-
-### Obtener un producto por ID
-- Método: `GET`
-- URL: `http://localhost:8080/api/products/:id` (Reemplaza `:id` con un ID existente)
-- Verifica que la solicitud devuelva el producto con el ID especificado.
-
-### Agregar un nuevo producto
-- Método: `POST`
-- URL: `http://localhost:8080/api/products`
-- Cuerpo de la solicitud (en formato JSON) con todos los campos requeridos.
-- Verifica que la solicitud devuelva un mensaje indicando que el producto se agregó correctamente.
-- Consideraciones de seguridad: No permite crear productos repetidos por código.
-
-### Actualizar un producto por ID
-- Método: `PUT`
-- URL: `http://localhost:8080/api/products/:id` (Reemplaza `:id` con un ID existente)
-- Cuerpo de la solicitud (en formato JSON) con los campos que deseas actualizar.
-- Verifica que la solicitud actualice el producto con el ID especificado.
-
-### Eliminar un producto por ID
-- Método: `DELETE`
-- URL: `http://localhost:8080/api/products/:id` (Reemplaza `:id` con un ID existente)
-- Verifica que la solicitud elimine el producto con el ID especificado.
-
-### Crear un nuevo carrito
-- Método: `POST`
-- URL: `http://localhost:8080/api/carts`
-- Verifica que la solicitud cree un nuevo carrito.
-
-### Listar productos en un carrito por ID de carrito
-- Método: `GET`
-- URL: `http://localhost:8080/api/carts/:cid` (Reemplaza `:cid` con un ID de carrito existente)
-- Verifica que la solicitud devuelva los productos en el carrito con el ID de carrito especificado.
-
-### Agregar un producto a un carrito
-- Método: `POST`
-- URL: `http://localhost:8080/api/carts/:cid/product/:pid` (Reemplaza `:cid` con un ID de carrito y `:pid` con un ID de producto)
-- Verifica que la solicitud agregue el producto al carrito especificado y maneje correctamente la lógica para la cantidad de productos.
-- Consideraciones de seguridad: No permite agregar productos inexistentes al carrito.
-
-### Eliminar un producto de un carrito
-- Método: `DELETE`
-- URL: `http://localhost:8080/api/carts/:cid/product/:pid` (Reemplaza `:cid` con un ID de carrito y `:pid` con un ID de producto)
-- Verifica que la solicitud elimine el producto del carrito especificado.
-
-### Eliminar un carrito por ID
-- Método: `DELETE`
-- URL: `http://localhost:8080/api/carts/:cid` (Reemplaza `:cid` con un ID de carrito existente)
-- Verifica que la solicitud elimine el carrito con el ID especificado.
+- `/carts/:cid (cartId)`: Vista para visualizar un carrito específico, listando solo los productos que pertenecen a dicho carrito.
