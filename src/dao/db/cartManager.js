@@ -22,38 +22,42 @@ class CartManager {
     async addToCart(cartId, productId, quantity = 1) {
         try {
             const cart = await Cart.findById(cartId);
-            const product = await Product.findById(productId);
-    
             if (!cart) {
                 console.log('Carrito no encontrado');
                 return { success: false, message: 'Carrito no encontrado', cart: null };
             }
     
+            const product = await Product.findById(productId);
             if (!product) {
                 console.log('Producto no encontrado');
                 return { success: false, message: 'Producto no encontrado', cart: null };
             }
     
+            // Verificar si el producto ya está en el carrito
             const existingProductIndex = cart.products.findIndex(item => item.productId.equals(productId));
-            
+    
             if (existingProductIndex >= 0) {
+                // Si el producto ya existe, actualiza su cantidad
                 cart.products[existingProductIndex].quantity += quantity;
             } else {
+                // Si es un nuevo producto, lo añade al carrito
                 cart.products.push({ productId, quantity });
             }
     
-            await cart.save();
+            await cart.save(); // Guarda los cambios en el carrito
     
-            if (existingProductIndex >= 0) {
-                return { success: true, message: 'Cantidad de producto actualizada en el carrito', cart: cart };
-            } else {
-                return { success: true, message: 'Producto agregado al carrito', cart: cart };
-            }
+            return { success: true, message: 'Producto agregado al carrito correctamente', cart: cart };
         } catch (error) {
-            console.error('Error añadiendo producto al carrito:', error);
-            throw error;
+            if (error instanceof CastError) {
+                console.error('ID incorrecto:', error);
+                return { success: false, message: 'ID incorrecto de carrito o producto', cart: null };
+            } else {
+                console.error('Error añadiendo producto al carrito:', error);
+                throw error;
+            }
         }
     }
+       
     
     async getAllCarts() {
         try {
@@ -75,10 +79,16 @@ class CartManager {
             }
             return cart;
         } catch (error) {
-            console.error('Error obteniendo el carrito:', error);
-            throw error; // Mantener el throw aquí para errores reales de servidor/base de datos
+            if (error instanceof CastError && error.path === '_id') {
+                console.error('ID incorrecto de carrito:', error);
+                return null;
+            } else {
+                console.error('Error obteniendo el carrito:', error);
+                throw error; // Mantener el throw aquí para errores reales de servidor/base de datos
+            }
         }
-    }    
+    }
+       
 
     // Eliminar un carrito por ID
     async deleteCart(cartId) {

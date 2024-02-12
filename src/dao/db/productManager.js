@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { CastError } = require('mongoose').Error;
 const Product = require('../models/products-mongoose'); 
 
 class ProductManager {
@@ -31,8 +32,13 @@ class ProductManager {
         try {
             return await Product.findById(productId);
         } catch (error) {
-            console.error('Error obteniendo el producto por ID:', error);
-            throw error;
+            if (error instanceof CastError && error.path === '_id') {
+                console.error('ID incorrecto de producto:', error);
+                return null;
+            } else {
+                console.error('Error obteniendo el producto por ID:', error);
+                throw error;
+            }
         }
     }
 
@@ -41,8 +47,13 @@ class ProductManager {
         try {
             return await Product.findByIdAndUpdate(productId, productData, { new: true });
         } catch (error) {
-            console.error('Error actualizando el producto:', error);
-            throw error;
+            if (error instanceof CastError && error.path === '_id') {
+                console.error('ID incorrecto de producto:', error);
+                return null;
+            } else {
+                console.error('Error actualizando el producto:', error);
+                throw error;
+            }
         }
     }
 
@@ -51,10 +62,15 @@ class ProductManager {
         try {
             return await Product.findByIdAndDelete(productId);
         } catch (error) {
-            console.error('Error eliminando el producto:', error);
-            throw error;
+            if (error instanceof CastError && error.path === '_id') {
+                console.error('ID incorrecto de producto:', error);
+                return null;
+            } else {
+                console.error('Error eliminando el producto:', error);
+                throw error;
+            }
         }
-    }    
+    }  
 }
 
 module.exports = ProductManager;
