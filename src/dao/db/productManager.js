@@ -21,8 +21,16 @@ class ProductManager {
     }
 
     // Obtener todos los productos
-    async getProducts({ limit, page = 1, sort = '', query = '' } = {}) {
+    async getProducts(opts = null) {
         try {
+            // Si no se pasan opciones, devuelve todos los productos
+            if (!opts) {
+                return await Product.find({});
+            }
+    
+            // Desde aquí, el código maneja los casos con opciones de paginación, ordenación y filtrado
+            const { limit, page = 1, sort = '', query = '' } = opts;
+    
             let queryFilter = {};
             if (query) {
                 if (query.startsWith("categoria:") || query.startsWith("disponible:")) {
@@ -45,16 +53,12 @@ class ProductManager {
                 sortOptions.price = sort === 'asc' ? 1 : -1;
             }
     
-            if (limit !== undefined) {
-                limit = parseInt(limit);
-            }
-    
-            // Si 'limit' es 0, buscar todos los documentos sin aplicar paginación
-            if (limit === 0) {
+            // Manejar el caso donde no se requiere paginación
+            // Esto se aplica cuando limit no se define o es 0
+            if (limit === undefined || limit === 0) {
                 const docs = await Product.find(queryFilter).sort(sortOptions);
                 return {
                     products: docs,
-                    // Asumir valores para mantener la estructura del objeto de respuesta
                     totalPages: 1,
                     page: 1,
                     hasPrevPage: false,
@@ -63,9 +67,10 @@ class ProductManager {
                     nextPage: null,
                 };
             } else {
+                // Aplicar paginación solo si 'limit' y 'page' están definidos
                 const options = {
                     page,
-                    limit, // Usar el valor de 'limit' ajustado o el valor por defecto
+                    limit,
                     sort: sortOptions,
                 };
                 const result = await Product.paginate(queryFilter, options);
@@ -83,7 +88,8 @@ class ProductManager {
             console.error('Error obteniendo los productos:', error);
             throw error;
         }
-    }          
+    }
+             
 
     // Obtener un producto por ID
     async getProductById(productId) {
