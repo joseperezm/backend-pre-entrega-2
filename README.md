@@ -83,8 +83,8 @@
 - [Buscar "impresora" (Ejemplo de query)](http://localhost:8080/?query=impresora) - `http://localhost:8080/?query=impresora`
 - [5 Productos, Primera Página, Orden Ascendente](http://localhost:8080/?limit=5&page=1&sort=asc) - `http://localhost:8080/?limit=5&page=1&sort=asc`
 - [5 Productos, Segunda Página, Orden Descendente](http://localhost:8080/?limit=5&page=2&sort=desc) - `http://localhost:8080/?limit=5&page=2&sort=desc`
-- [Buscar "para", Orden Ascendente](http://localhost:8080/?query=para&sort=asc) - `http://localhost:8080/?query=para&sort=asc`
-- [Buscar "para", Orden Descendente](http://localhost:8080/?query=para&sort=desc) - `http://localhost:8080/?query=para&sort=desc`
+- [Buscar "teclado", Orden Ascendente](http://localhost:8080/?query=teclado&sort=asc) - `http://localhost:8080/?query=teclado&sort=asc`
+- [Buscar "teclado", Orden Descendente](http://localhost:8080/?query=teclado&sort=desc) - `http://localhost:8080/?query=teclado&sort=desc`
 - [Buscar por Categoría: Electrónicos](http://localhost:8080/?query=categoria:Electrónicos&limit=0) - `http://localhost:8080/?query=categoria:Electrónicos&limit=0`
 - [Buscar Productos Disponibles](http://localhost:8080/?query=disponible:true&limit=25) - `http://localhost:8080/?query=disponible:true&limit=25`
 
@@ -99,7 +99,7 @@
 - [Buscar "impresora" (Ejemplo de query)](http://localhost:8080/api/products/?query=impresora) - `http://localhost:8080/api/products/?query=impresora` - Método: `GET`.
 - [5 Productos, Primera Página, Orden Ascendente](http://localhost:8080/api/products/?limit=5&page=1&sort=asc) - `http://localhost:8080/api/products/?limit=5&page=1&sort=asc` - Método: `GET`.
 - [5 Productos, Segunda Página, Orden Descendente](http://localhost:8080/api/products/?limit=5&page=2&sort=desc) - `http://localhost:8080/api/products/?limit=5&page=2&sort=desc` - Método: `GET`.
-- [Buscar "para", Orden Ascendente](http://localhost:8080/api/products/?query=para&sort=asc) - `http://localhost:8080/api/products/?query=para&sort=asc` - Método: `GET`.
-- [Buscar "para", Orden Descendente](http://localhost:8080/api/products/?query=para&sort=desc) - `http://localhost:8080/api/products/?query=para&sort=desc` - Método: `GET`.
+- [Buscar "teclado", Orden Ascendente](http://localhost:8080/api/products/?query=teclado&sort=asc) - `http://localhost:8080/api/products/?query=teclado&sort=asc` - Método: `GET`.
+- [Buscar "teclado", Orden Descendente](http://localhost:8080/api/products/?query=teclado&sort=desc) - `http://localhost:8080/api/products/?query=teclado&sort=desc` - Método: `GET`.
 - [Buscar por Categoría: Electrónicos](http://localhost:8080/api/products/?query=categoria:Electrónicos) - `http://localhost:8080/api/products/?query=categoria:Electrónicos` - Método: `GET`.
 - [Buscar Productos Disponibles](http://localhost:8080/api/products/?query=disponible:true) - `http://localhost:8080/api/products/?query=disponible:true` - Método: `GET`.
