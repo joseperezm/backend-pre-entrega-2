@@ -1,4 +1,16 @@
 <h1 class="titulos">Mis productos</h1>
+<!-- Botones de Ordenamiento -->
+<div class="centrar-botones">
+<div class="btn-group sorting-buttons" role="group" aria-label="Sorting Buttons">
+  <a href="?page=1&sort=asc" class="btn btn-secondary">
+    <i class="bi bi-sort-down-alt"></i> <!-- Ícono para Orden Ascendente -->
+  </a>
+  <a href="?page=1&sort=desc" class="btn btn-secondary">
+    <i class="bi bi-sort-down"></i> <!-- Ícono para Orden Descendente -->
+  </a>
+</div>
+</div>
+
 <div class="contenedorCards">
     {{#each productos}}
     <div class="card mb-3">
@@ -7,8 +19,38 @@
         <div class="card-body">
             <h5 class="card-title">{{this.title}}</h5>
             <p class="card-text">{{this.description}}</p>
+            <p class="card-text">Categoría: {{this.category}}</p>
             <p class="card-text">Precio: {{this.price}}</p>
+            <p class="card-text">Stock: {{this.stock}}</p>
         </div>
     </div>
     {{/each}}
 </div>
+
+<!-- Controles de paginación -->
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    {{#if hasPrevPage}}
+    <li class="page-item">
+      <!-- Incluye el parámetro sort actual en el enlace de la página anterior -->
+      <a class="page-link" href="?page={{prevPage}}{{#if sort}}&sort={{sort}}{{/if}}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {{/if}}
+    {{#each pages}}
+    <li class="page-item {{#if this.isCurrent}}active{{/if}}">
+      <!-- Incluye el parámetro sort actual en el enlace de cada número de página -->
+      <a class="page-link" href="?page={{this.number}}{{#if ../sort}}&sort={{../sort}}{{/if}}">{{this.number}}</a>
+    </li>
+    {{/each}}
+    {{#if hasNextPage}}
+    <li class="page-item">
+      <!-- Incluye el parámetro sort actual en el enlace de la página siguiente -->
+      <a class="page-link" href="?page={{nextPage}}{{#if sort}}&sort={{sort}}{{/if}}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {{/if}}
+  </ul>
+</nav>

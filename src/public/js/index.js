@@ -1,7 +1,13 @@
 const socket = io();
 
 socket.on("productos", (data) => {
-    renderProductos(data);
+    // Ahora 'data' es un objeto que incluye 'products' y metadatos de paginación
+    // Verificar si 'data.products' existe y es un array antes de intentar renderizar los productos
+    if (Array.isArray(data.products)) {
+        renderProductos(data.products); // Pasar solo el array de productos a la función de renderización
+    } else {
+        console.error('Se esperaba un array de productos dentro del objeto recibido, pero se recibió:', data);
+    }
 }); 
 
 const renderProductos = (productos) => {
@@ -13,13 +19,20 @@ const renderProductos = (productos) => {
         card.classList.add("card");
         card.innerHTML = `
                 <img src="${item.thumbnails}" class="card-img-top" alt="${item.title}">
-                <p>Id ${item._id} </p>
-                <p>Titulo ${item.title} </p>
-                <p>Precio ${item.price} </p>
-                <button type="button" class="btn btn-primary mt-2"> Eliminar Producto </button>
+                <div class="card-body">
+                    <h5 class="card-title">${item.title}</h5>
+                    <p class="card-title">Categoría: ${item.category}</p>
+                    <p class="card-text">Precio: $${item.price}</p>
+                    <p class="card-text">Stock: ${item.stock}</p>
+                    <p class="card-text">Status: ${item.status}</p>
+                    <p class="card-text">Code: ${item.code}</p>
+                    <p class="card-text mini mt-2 mb-2">ID: ${item._id}</p>
+                    <button type="button" class="btn btn-primary mt-2">Eliminar Producto</button>
+                </div>
         `;
         contenedorProductos.appendChild(card);
 
+        // Reintegrando la escucha de evento al botón dentro de cada tarjeta de producto
         card.querySelector("button").addEventListener("click", () => {
             eliminarProducto(item._id);
         });
@@ -40,46 +53,24 @@ const agregarProducto = () => {
     const category = document.getElementById("category").value;
     const status = document.getElementById("status").value === "true";
 
-    // Función para verificar si es una URL válida
-    const esURL = (texto) => {
-        const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
-        return urlRegex.test(texto);
-    }
-
-    // Función para agregar el prefijo 'uploads/' si no es una URL válida
-    const ajustarThumbnail = (thumbnail) => {
-        // Si el campo thumbnails está en blanco, retornar la URL por defecto
-        if (thumbnail.trim() === "") {
-            return "uploads/placeholder.jpg"; // URL por defecto
-        } else if (esURL(thumbnail)) {
-            // Si es una URL válida, retornarla tal cual
-            return thumbnail;
-        } else {
-            // Si es un nombre de archivo, anteponer "uploads/"
-            return `uploads/${thumbnail}`;
-        }
-    };
-    
-
-    // Validación de campos obligatorios
-    if (!title || !description || !code || !price || !stock || !category) {
-        alert("Por favor, complete todos los campos obligatorios: título, descripción, código, precio, stock y categoría.");
-        return;
-    }
-
     const producto = {
         title: title,
         description: description,
         price: parseFloat(price),
-        thumbnails: ajustarThumbnail(thumbnails), // Aplicar la función de ajuste al thumbnail
+        thumbnails: thumbnails || "uploads/placeholder.jpg", // Usar placeholder si no se proporciona thumbnail
         code: code,
         stock: parseInt(stock),
         category: category,
         status: status
     };
     
+    // Validación de campos obligatorios
+    if (!title || !description || !code || !price || !stock || !category) {
+        alert("Por favor, complete todos los campos obligatorios.");
+        return;
+    }
+
     socket.emit("agregarProducto", producto);
 };
 
-// Evento de clic en el botón "Agregar producto"
 document.getElementById("btnEnviar").addEventListener("click", agregarProducto);

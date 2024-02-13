@@ -93,3 +93,39 @@ form {
     border: 1px solid #00bcd4;
     border-radius: 10px;
 }
+
+.input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    margin-left: calc(var(--bs-border-width) * 2);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.input-group:not(.has-validation) > .dropdown-toggle:nth-last-child(n+3), .input-group:not(.has-validation) > .form-floating:not(:last-child) > .form-control, .input-group:not(.has-validation) > .form-floating:not(:last-child) > .form-select, .input-group:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating) {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.mini {
+    font-size: x-small;
+}
+
+.sorting-buttons {
+    margin-bottom: 10px;
+}
+
+.centrar-botones {
+    text-align: right;
+    margin-right: 10px;
+
+}
+
+.page-link {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+.page-link:hover {
+    color: #fff;
+    background-color: #5c636a;
+    border-color: #565e64;
+}

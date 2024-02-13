@@ -8,20 +8,37 @@ const ProductManager = require("../dao/db/productManager");
 const productManager = new ProductManager();
 
 router.get('/products', async (req, res) => {
+    const limit = parseInt(req.query.limit) || 10;
+    const page = parseInt(req.query.page) || 1;
+    const sort = req.query.sort; // asc o desc
+    const query = req.query.query; // Búsqueda específica, podría ser categoría o disponibilidad
+    
     try {
-        const limit = req.query.limit; 
-        let products;
+        // La lógica para aplicar filtros, ordenamiento y paginación deberá ser implementada en getProducts
+        const { products, totalPages } = await productManager.getProducts({ limit, page, sort, query });
 
-        if (limit) {
-            products = await productManager.getProducts();
-            products = products.slice(0, parseInt(limit));
-        } else {
-            products = await productManager.getProducts();
-        }
+        // Calcular prevPage, nextPage, hasPrevPage, hasNextPage, prevLink, nextLink
+        const hasPrevPage = page > 1;
+        const hasNextPage = page < totalPages;
+        const prevPage = hasPrevPage ? page - 1 : null;
+        const nextPage = hasNextPage ? page + 1 : null;
+        const baseUrl = '/products?'; // Asegúrate de construir los links prevLink y nextLink adecuadamente
 
-        res.json(products);
+        res.json({
+            status: "success",
+            payload: products,
+            totalPages,
+            prevPage,
+            nextPage,
+            page,
+            hasPrevPage,
+            hasNextPage,
+            prevLink: hasPrevPage ? `${baseUrl}page=${prevPage}` : null,
+            nextLink: hasNextPage ? `${baseUrl}page=${nextPage}` : null
+        });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error('Error obteniendo los productos:', error);
+        res.status(500).json({ status: "error", message: error.message });
     }
 });
 
