@@ -47,6 +47,7 @@
 
 - `/carts/:cid (cartId)`: Vista para visualizar un carrito específico, listando solo los productos que pertenecen a dicho carrito.
 
+#
 # Testeos
 
 ## Primera Pre-Entrega
