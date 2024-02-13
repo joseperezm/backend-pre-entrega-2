@@ -8,7 +8,7 @@ const ProductManager = require("../dao/db/productManager");
 const productManager = new ProductManager();
 
 router.get('/products', async (req, res) => {
-    const limit = parseInt(req.query.limit) || 10;
+    const limit = req.query.limit === undefined ? 10 : parseInt(req.query.limit, 10);
     const page = parseInt(req.query.page) || 1;
     const sort = req.query.sort; // asc o desc
     const query = req.query.query; // Búsqueda específica, podría ser categoría o disponibilidad

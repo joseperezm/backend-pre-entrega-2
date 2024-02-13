@@ -25,11 +25,19 @@ class ProductManager {
         try {
             let queryFilter = {};
             if (query) {
-                // Búsqueda general por título o descripción
-                queryFilter.$or = [
-                    { title: { $regex: query, $options: 'i' } },
-                    { description: { $regex: query, $options: 'i' } }
-                ];
+                if (query.startsWith("categoria:") || query.startsWith("disponible:")) {
+                    const [key, value] = query.split(":");
+                    if (key === "categoria") {
+                        queryFilter.category = value;
+                    } else if (key === "disponible") {
+                        queryFilter.status = value === 'true';
+                    }
+                } else {
+                    queryFilter.$or = [
+                        { title: { $regex: query, $options: 'i' } },
+                        { description: { $regex: query, $options: 'i' } }
+                    ];
+                }
             }
     
             let sortOptions = {};
@@ -38,21 +46,15 @@ class ProductManager {
             }
     
             if (limit !== undefined) {
-                // Convertir limit a número si se ha proporcionado
                 limit = parseInt(limit);
             }
     
-            const options = {
-                page: page,
-                limit: limit, // Puede ser undefined si queremos todos los productos
-                sort: sortOptions,
-            };
-    
-            if (limit === undefined) {
-                // Si no se especifica limit, buscar todos los documentos sin paginación
+            // Si 'limit' es 0, buscar todos los documentos sin aplicar paginación
+            if (limit === 0) {
                 const docs = await Product.find(queryFilter).sort(sortOptions);
                 return {
                     products: docs,
+                    // Asumir valores para mantener la estructura del objeto de respuesta
                     totalPages: 1,
                     page: 1,
                     hasPrevPage: false,
@@ -61,7 +63,11 @@ class ProductManager {
                     nextPage: null,
                 };
             } else {
-                // Usar mongoose-paginate-v2 para la paginación
+                const options = {
+                    page,
+                    limit, // Usar el valor de 'limit' ajustado o el valor por defecto
+                    sort: sortOptions,
+                };
                 const result = await Product.paginate(queryFilter, options);
                 return {
                     products: result.docs,
@@ -77,7 +83,7 @@ class ProductManager {
             console.error('Error obteniendo los productos:', error);
             throw error;
         }
-    }    
+    }          
 
     // Obtener un producto por ID
     async getProductById(productId) {
