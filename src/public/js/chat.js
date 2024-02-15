@@ -56,5 +56,11 @@ document.addEventListener("DOMContentLoaded", function() {
         if (navbar) {
             navbar.style.display = "none";
         }
+
+        // Ocultar el footer
+        const footer = document.getElementById("footer"); // Asegúrate de que tu footer tenga un id="footer"
+        if (footer) {
+            footer.style.display = "none";
+        }
     }
 });

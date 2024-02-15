@@ -11,7 +11,7 @@
 </div>
 </div>
 
-<div class="contenedorCards">
+<div class="contenedorCards custom-container">
     {{#each productos}}
     <div class="card mb-3">
         <!-- Agregar imagen del producto -->
@@ -21,7 +21,7 @@
             <p class="card-text">{{this.description}}</p>
             <p class="card-text">Categoría: {{this.category}}</p>
             <p class="card-text">Precio: {{this.price}}</p>
-            <p class="card-text">Stock: {{this.stock}}</p>
+            <p class="card-text">Stock: <span class="{{#if this.stock}}text-success{{else}}text-danger{{/if}}">{{this.stock}}</span></p>
         </div>
     </div>
     {{/each}}

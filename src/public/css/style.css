@@ -133,3 +133,9 @@ form {
 .modal-title {
     color: black;
 }
+
+.custom-container .card:hover {
+    transform: scale(1.03);
+    transition: transform .3s ease-in-out, box-shadow .3s ease-in-out;
+    box-shadow: 0 0 11px rgba(33,33,33,.2); /* Ajusta la sombra a tu gusto */
+}
