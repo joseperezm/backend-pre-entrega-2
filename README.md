@@ -74,19 +74,19 @@
 
 ### URLs de Prueba para Web de Productos
 
-- [Primera Página (default limit 10)](http://localhost:8080/?page=1) - `http://localhost:8080/?page=1`
-- [Segunda Página (default limit 10)](http://localhost:8080/?page=2) - `http://localhost:8080/?page=2`
-- [Limitar a 5 Productos](http://localhost:8080/?limit=5) - `http://localhost:8080/?limit=5`
-- [Limitar a 20 Productos](http://localhost:8080/?limit=20) - `http://localhost:8080/?limit=20`
-- [Orden Ascendente por Precio](http://localhost:8080/?sort=asc) - `http://localhost:8080/?sort=asc`
-- [Orden Descendente por Precio](http://localhost:8080/?sort=desc) - `http://localhost:8080/?sort=desc`
-- [Buscar "impresora" (Ejemplo de query)](http://localhost:8080/?query=impresora) - `http://localhost:8080/?query=impresora`
-- [5 Productos, Primera Página, Orden Ascendente](http://localhost:8080/?limit=5&page=1&sort=asc) - `http://localhost:8080/?limit=5&page=1&sort=asc`
-- [5 Productos, Segunda Página, Orden Descendente](http://localhost:8080/?limit=5&page=2&sort=desc) - `http://localhost:8080/?limit=5&page=2&sort=desc`
-- [Buscar "teclado", Orden Ascendente](http://localhost:8080/?query=teclado&sort=asc) - `http://localhost:8080/?query=teclado&sort=asc`
-- [Buscar "teclado", Orden Descendente](http://localhost:8080/?query=teclado&sort=desc) - `http://localhost:8080/?query=teclado&sort=desc`
-- [Buscar por Categoría: Electrónicos](http://localhost:8080/?query=categoria:Electrónicos&limit=0) - `http://localhost:8080/?query=categoria:Electrónicos&limit=0`
-- [Buscar Productos Disponibles](http://localhost:8080/?query=disponible:true&limit=25) - `http://localhost:8080/?query=disponible:true&limit=25`
+- [Primera Página (default limit 10)](http://localhost:8080/products?page=1) - `http://localhost:8080/products?page=1`
+- [Segunda Página (default limit 10)](http://localhost:8080/products?page=2) - `http://localhost:8080/products?page=2`
+- [Limitar a 5 Productos](http://localhost:8080/products?limit=5) - `http://localhost:8080/products?limit=5`
+- [Limitar a 20 Productos](http://localhost:8080/products?limit=20) - `http://localhost:8080/products?limit=20`
+- [Orden Ascendente por Precio](http://localhost:8080/products?sort=asc) - `http://localhost:8080/products?sort=asc`
+- [Orden Descendente por Precio](http://localhost:8080/products?sort=desc) - `http://localhost:8080/products?sort=desc`
+- [Buscar "impresora" (Ejemplo de query)](http://localhost:8080/products?query=impresora) - `http://localhost:8080/products?query=impresora`
+- [5 Productos, Primera Página, Orden Ascendente](http://localhost:8080/products?limit=5&page=1&sort=asc) - `http://localhost:8080/products?limit=5&page=1&sort=asc`
+- [5 Productos, Segunda Página, Orden Descendente](http://localhost:8080/products?limit=5&page=2&sort=desc) - `http://localhost:8080/products?limit=5&page=2&sort=desc`
+- [Buscar "teclado", Orden Ascendente](http://localhost:8080/products?query=teclado&sort=asc) - `http://localhost:8080/products?query=teclado&sort=asc`
+- [Buscar "teclado", Orden Descendente](http://localhost:8080/products?query=teclado&sort=desc) - `http://localhost:8080/products?query=teclado&sort=desc`
+- [Buscar por Categoría: Electrónicos](http://localhost:8080/products?query=categoria:Electrónicos&limit=0) - `http://localhost:8080/products?query=categoria:Electrónicos&limit=0`
+- [Buscar Productos Disponibles](http://localhost:8080/products?query=disponible:true&limit=25) - `http://localhost:8080/products?query=disponible:true&limit=25`
 
 ### URLs de Prueba para API de Productos
 
