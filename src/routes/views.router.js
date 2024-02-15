@@ -7,7 +7,11 @@ const productManagerFs = new ProductManagerFs("../dao/fs/products.json");
 const ProductManager = require("../dao/db/productManager");
 const productManager = new ProductManager();
 
-router.get("/", async (req, res) => {
+router.get("/", (req, res) => {
+    res.render("index");
+});
+
+router.get("/products", async (req, res) => {
     try {
         const { limit, page, sort, query } = req.query;
 
@@ -25,7 +29,7 @@ router.get("/", async (req, res) => {
             return producto.toObject ? producto.toObject() : producto;
         }) : [];
 
-        res.render("index", {
+        res.render("products", {
             productos: productosObj,
             page: result.page,
             totalPages: result.totalPages,

@@ -47,3 +47,14 @@ document.getElementById('joinChat').addEventListener('click', function() {
         initializeChat(userEmail);
     }
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    if (window.location !== window.parent.location) {
+        // La página se está cargando dentro de un iframe
+        // Ocultar el navbar
+        const navbar = document.getElementById("navbar");
+        if (navbar) {
+            navbar.style.display = "none";
+        }
+    }
+});
