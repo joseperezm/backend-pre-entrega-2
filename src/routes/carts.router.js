@@ -55,6 +55,41 @@ router.post("/carts/:cid/product/:pid", async (req, res) => {
     }
 });
 
+router.put("/carts/:cid", async (req, res) => {
+    const { cid } = req.params;
+    const { products } = req.body; // Asegurándonos de extraer correctamente el arreglo de productos
+
+    try {
+        const updatedCart = await cartManager.updateCartProducts(cid, products);
+        if (updatedCart) {
+            res.json({ message: "Carrito actualizado con éxito", cart: updatedCart });
+        } else {
+            res.status(404).json({ message: "Carrito no encontrado" });
+        }
+    } catch (error) {
+        console.error("Error al actualizar el carrito", error);
+        res.status(500).json({ message: "Error del servidor" });
+    }
+});
+
+
+router.put("/carts/:cid/product/:pid", async (req, res) => {
+    const { cid, pid } = req.params;
+    const { quantity } = req.body;
+
+    try {
+        const result = await cartManager.updateProductQuantity(cid, pid, quantity);
+        if (result.success) {
+            res.json({ message: "Cantidad actualizada correctamente", cart: result.cart });
+        } else {
+            res.status(404).json({ message: result.message });
+        }
+    } catch (error) {
+        console.error("Error al actualizar la cantidad del producto en el carrito", error);
+        res.status(500).json({ message: "Error del servidor" });
+    }
+});
+
 router.delete("/carts/:cid", async (req, res) => {
     try {
         const success = await cartManager.deleteCart(req.params.cid);

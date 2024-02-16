@@ -155,6 +155,51 @@ class CartManager {
                 throw error;
             }
         }
+    }
+    
+    async updateProductQuantity(cartId, productId, quantity) {
+        const cart = await this.getCart(cartId); // Asegúrate de tener una función getCart que retorne el carrito
+        if (!cart) {
+            return { success: false, message: "Carrito no encontrado" };
+        }
+    
+        const productIndex = cart.products.findIndex(p => p.productId.equals(productId));
+        if (productIndex === -1) {
+            return { success: false, message: "Producto no encontrado en el carrito" };
+        }
+    
+        // Si la cantidad es 0 o menor, considerar eliminar el producto del carrito
+        if (quantity <= 0) {
+            cart.products.splice(productIndex, 1); // Elimina el producto
+        } else {
+            cart.products[productIndex].quantity = quantity; // Actualiza la cantidad
+        }
+    
+        await cart.save();
+        return { success: true, cart: cart };
+    }
+    
+    async updateCartProducts(cartId, products) {
+        try {
+            const cart = await Cart.findById(cartId);
+            if (!cart) {
+                return { success: false, message: "Carrito no encontrado" };
+            }
+    
+            // Asegúrate de crear nuevos ObjectId para los productId
+            const updatedProducts = products.map(product => ({
+                productId: new mongoose.Types.ObjectId(product.productId),
+                quantity: Number(product.quantity)
+            }));
+    
+            cart.products = updatedProducts;c
+    
+            await cart.save();
+            return { success: true, cart: cart };
+        } catch (error) {
+            console.error("Error al actualizar el carrito con nuevos productos", error);
+            throw error;
+        }
     }    
           
 }
