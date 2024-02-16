@@ -25,6 +25,13 @@ app.engine("handlebars", exphbs.engine({
     helpers: {
         multiply: function(a, b) {
             return (a * b).toFixed(2);
+        },
+        totalCart: function(products) {
+            let total = 0;
+            products.forEach(product => {
+                total += product.quantity * product.productId.price;
+            });
+            return total.toFixed(2);
         }
     }
 }));
