@@ -1,12 +1,12 @@
 const socket = io();
 
-socket.on("productos", (data) => {
-    renderProductos(data);
+socket.on("products", (data) => {
+    renderProducts(data);
 }); 
 
-const renderProductos = (productos) => {
-    const contenedorProductos = document.getElementById("contenedorProductos");
-    contenedorProductos.innerHTML = "";
+const renderProducts = (productos) => {
+    const productContainer = document.getElementById("productContainer");
+    productContainer.innerHTML = "";
 
 
     productos.forEach(item => {
@@ -25,24 +25,24 @@ const renderProductos = (productos) => {
             <button type="button" class="btn btn-primary mt-2">Eliminar Producto</button>
         </div>
         `;
-        contenedorProductos.appendChild(card);
+        productContainer.appendChild(card);
 
         card.querySelector("button").addEventListener("click", () => {
-            eliminarProducto(item._id);
+            deleteProduct(item._id);
         });
     });
 }
 
-const eliminarProducto = (id) => {
-    socket.emit("eliminarProducto", id);
+const deleteProduct = (id) => {
+    socket.emit("deleteProduct", id);
 }
 
-document.getElementById("btnEnviar").addEventListener("click", () => {
-    agregarProducto();
+document.getElementById("btnSend").addEventListener("click", () => {
+    addProduct();
 });
 
 
-const agregarProducto = () => {
+const addProduct = () => {
     const title = document.getElementById("title").value;
     const description = document.getElementById("description").value;
     const price = document.getElementById("price").value;
@@ -52,7 +52,7 @@ const agregarProducto = () => {
     const category = document.getElementById("category").value;
     const status = document.getElementById("status").value === "true";
 
-    const producto = {
+    const product = {
         title: title,
         description: description,
         price: parseFloat(price),
@@ -68,7 +68,7 @@ const agregarProducto = () => {
         return;
     }
     
-    socket.emit("agregarProducto", producto);
+    socket.emit("addProduct", product);
 };
 
 

@@ -35,7 +35,7 @@ h1, h2, a {
     margin: auto;
 }
 
-#contenedorProductos {
+#productContainer {
     display: flex;
     flex-wrap: wrap;
     gap:20px;

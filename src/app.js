@@ -57,16 +57,16 @@ const io = socket(server);
 io.on("connection", async (socket) => {
     console.log("Nuevo cliente conectado");
 
-    socket.emit("productos", await productManager.getProducts());    
+    socket.emit("products", await productManager.getProducts());    
     
-    socket.on("eliminarProducto", async (id) => {
+    socket.on("deleteProduct", async (id) => {
         await productManager.deleteProduct(id);
-        io.sockets.emit("productos", await productManager.getProducts());
+        io.sockets.emit("products", await productManager.getProducts());
     });
 
-    socket.on("agregarProducto", async (producto) => {
+    socket.on("addProduct", async (producto) => {
         await productManager.addProduct(producto);
-        io.sockets.emit("productos", await productManager.getProducts());
+        io.sockets.emit("products", await productManager.getProducts());
     });
 });
 

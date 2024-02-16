@@ -10,7 +10,7 @@
                     <p>Cantidad: <span class="badge bg-secondary">{{this.quantity}}</span></p>
                     <p>Precio: <span class="text-muted">${{this.productId.price}}</span></p>
                     <p>Total: <span class="text-muted">$ {{multiply this.quantity this.productId.price}}</span></p>
-                    <button class="delete-product-button btn btn-danger mt-2 mb-2" data-cart-id="{{../cart._id}}" data-product-id="{{this.productId._id}}">Eliminar del carrito</button>
+                    <button class="delete-product-button btn btn-danger mt-2 mb-2" data-cart-id="{{../cart._id}}" data-product-id="{{this.productId._id}}">Eliminar producto</button>
                 </div>
             {{/each}}
         </div>
@@ -24,5 +24,5 @@
     {{/if}}
 </div>
 
-<script src="/js/eliminarProducto.js"></script>
+<script src="/js/deleteProduct.js"></script>
 
