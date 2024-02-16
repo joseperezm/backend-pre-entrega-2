@@ -1,0 +1,17 @@
+<h1 class="mt-4">Detalles del Carrito</h1>
+<hr>
+<div>{{#if cart.products.length}}
+    <ul>
+        {{#each cart.products}}
+            <li>
+                <h2>{{this.productId.title}}</h2>
+                <p>{{this.productId.description}}</p>
+                <p>Cantidad: {{this.quantity}}</p>
+                <p>Precio: ${{this.productId.price}}</p>
+            </li>
+        {{/each}}
+    </ul>
+{{else}}
+    <p>El carrito está vacío.</p>
+{{/if}}<hr>
+</div>

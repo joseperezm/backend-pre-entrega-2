@@ -1,0 +1,13 @@
+    <h1 class="mt-4">Carritos Actuales</h1>
+    <hr>
+    {{#if carts.length}}
+    {{#each carts}}
+        <ul>
+            <li>ID: <a href="/carts/{{this._id}}">{{this._id}}</a></li>
+            <li>Fecha: {{this.date}}</li>
+        </ul>
+        {{/each}}
+    {{else}}
+        <p>No hay carritos disponibles.</p>
+    {{/if}}
+    <hr>

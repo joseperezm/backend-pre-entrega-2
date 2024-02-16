@@ -72,16 +72,16 @@ class CartManager {
     // Obtener el carrito y sus productos
     async getCart(cartId) {
         try {
-            const cart = await Cart.findById(cartId).populate('products');
+            const cart = await Cart.findById(cartId).populate('products.productId');
             if (!cart) {
-                console.log('Carrito no encontrado'); // Cambiado de throw new Error a console.log
+                console.log('Carrito no encontrado');
                 return null; // Devuelve null para indicar que no se encontró el carrito
             }
             return cart;
         } catch (error) {
             if (error instanceof CastError && error.path === '_id') {
                 console.error('ID incorrecto de carrito:', error);
-                return null;
+                return null; // Devuelve null para indicar un error de CastError específicamente con el _id
             } else {
                 console.error('Error obteniendo el carrito:', error);
                 throw error; // Mantener el throw aquí para errores reales de servidor/base de datos
