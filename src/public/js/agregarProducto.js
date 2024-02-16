@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     addToCartButtons.forEach(button => {
         button.addEventListener('click', function() {
             const productId = this.getAttribute('data-product-id');
-            
+
             // Hacer fetch para obtener todos los carritos disponibles
             fetch('/api/carts')
                 .then(response => {
@@ -20,13 +20,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     const cartId = prompt(`Ingrese el ID del carrito al que desea añadir el producto:\nDisponibles: ${cartList}`);
                     
                     if (cartId && cartIds.includes(cartId)) {
+                        const quantityInput = document.getElementById(`quantity-${productId}`);
+                        const quantity = quantityInput ? quantityInput.value : 1; // Usa el valor del selector de cantidad o 1 por defecto
+                        
                         // Aquí la lógica para agregar el producto al carrito especificado
                         fetch(`/api/carts/${cartId}/product/${productId}`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
                             },
-                            // Enviar cualquier otra información necesaria para la adición del producto, si es necesario
+                            body: JSON.stringify({ quantity: quantity }) // Enviar la cantidad seleccionada
                         })
                         .then(response => response.json())
                         .then(data => {
