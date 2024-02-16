@@ -21,7 +21,13 @@ app.use(express.json());
 
 app.use(express.static("./src/public"));
 
-app.engine("handlebars", exphbs.engine());
+app.engine("handlebars", exphbs.engine({
+    helpers: {
+        multiply: function(a, b) {
+            return (a * b).toFixed(2);
+        }
+    }
+}));
 app.set("view engine", "handlebars");
 app.set("views", "./src/views");
 
