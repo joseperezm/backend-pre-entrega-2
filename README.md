@@ -76,16 +76,17 @@
 ### URLs de Prueba para API de Carritos
 
 - [Crear un nuevo carrito](http://localhost:8080/api/carts) - `http://localhost:8080/api/carts` - Método: `POST`.
+- [Ver todos los carritos](http://localhost:8080/api/carts) - `http://localhost:8080/api/carts` - Método: `GET`.
 - [Listar productos en un carrito por ID de carrito](http://localhost:8080/api/carts/:cid) - `http://localhost:8080/api/carts/:cid` - Método: `GET`.
 - [Agregar un producto a un carrito](http://localhost:8080/api/carts/:cid/product/:pid) - `http://localhost:8080/api/carts/:cid/product/:pid` - Método: `POST`.
 - [Actualizar el carrito con un arreglo de productos](http://localhost:8080/api/carts/:cid) - `http://localhost:8080/api/carts/:cid` - Método: `PUT`.
 - [Actualizar la cantidad de un producto específico en el carrito](http://localhost:8080/api/carts/:cid/product/:pid) - `http://localhost:8080/api/carts/:cid/products/:pid` - Método: `PUT`.
-
 - [Eliminar un producto de un carrito](http://localhost:8080/api/carts/:cid/product/:pid) - `http://localhost:8080/api/carts/:cid/product/:pid` - Método: `DELETE`.
 - [Eliminar un carrito por ID](http://localhost:8080/api/carts/:cid) - `http://localhost:8080/api/carts/:cid` - Método: `DELETE`.
 
 ### URLs de Prueba para Web de Productos
 
+- [Muestra todos los productos con paginación](http://localhost:8080/products) - `http://localhost:8080/products` - Método: `GET`.
 - [Primera Página (default limit 10)](http://localhost:8080/products?page=1) - `http://localhost:8080/products?page=1`
 - [Segunda Página (default limit 10)](http://localhost:8080/products?page=2) - `http://localhost:8080/products?page=2`
 - [Limitar a 5 Productos](http://localhost:8080/products?limit=5) - `http://localhost:8080/products?limit=5`
@@ -99,6 +100,9 @@
 - [Buscar "teclado", Orden Descendente](http://localhost:8080/products?query=teclado&sort=desc) - `http://localhost:8080/products?query=teclado&sort=desc`
 - [Buscar por Categoría: Electrónicos](http://localhost:8080/products?query=categoria:Electrónicos&limit=0) - `http://localhost:8080/products?query=categoria:Electrónicos&limit=0`
 - [Buscar Productos Disponibles](http://localhost:8080/products?query=disponible:true&limit=25) - `http://localhost:8080/products?query=disponible:true&limit=25`
-- [Muestra todos los productos con paginación](http://localhost:8080/api/products) - `http://localhost:8080/api/products` - Método: `GET`.
-- [Vista para visualizar un carrito específico](http://localhost:8080/api/carts/:cid) - `http://localhost:8080/api/carts/:cid` - Método: `GET`.
+
+### URLs de Prueba para Web de Carritos
+
+- [Vista para visualizar todos los carritos](http://localhost:8080/carts) - `http://localhost:8080/carts` - Método: `GET`.
+- [Vista para visualizar un carrito específico](http://localhost:8080/carts/:cid) - `http://localhost:8080/carts/:cid` - Método: `GET`.
 
