@@ -42,8 +42,7 @@
 
 - `/products`: Muestra todos los productos con paginación.
   - Opciones de visualización:
-    1. Nueva vista con detalles completos del producto y opción de agregar al carrito.
-    2. Botón de "agregar al carrito" directamente en la lista de productos.
+    1. Botón de "agregar al carrito" directamente en la lista de productos.
 
 - `/carts/:cid (cartId)`: Vista para visualizar un carrito específico, listando solo los productos que pertenecen a dicho carrito.
 
