@@ -22,6 +22,8 @@
             <p class="card-text">Categoría: {{this.category}}</p>
             <p class="card-text">Precio: {{this.price}}</p>
             <p class="card-text">Stock: <span class="{{#if this.stock}}text-success{{else}}text-danger{{/if}}">{{this.stock}}</span></p>
+            <!-- Botón Añadir a Carrito -->
+            <button class="btn btn-primary add-to-cart mb-4 mt-4" data-product-id="{{this._id}}">Añadir a Carrito</button>
         </div>
     </div>
     {{/each}}
@@ -54,3 +56,4 @@
     {{/if}}
   </ul>
 </nav>
+<script src="/js/agregarProducto.js"></script>

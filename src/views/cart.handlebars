@@ -8,6 +8,7 @@
                 <p>{{this.productId.description}}</p>
                 <p>Cantidad: {{this.quantity}}</p>
                 <p>Precio: ${{this.productId.price}}</p>
+                <button class="delete-product-button btn btn-danger mt-4 mb-4" data-cart-id="{{../cart._id}}" data-product-id="{{this.productId._id}}">Eliminar del carrito</button>
             </li>
         {{/each}}
     </ul>
@@ -15,3 +16,4 @@
     <p>El carrito está vacío.</p>
 {{/if}}<hr>
 </div>
+<script src="/js/eliminarProducto.js"></script>
