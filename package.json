@@ -1,7 +1,7 @@
 {
-  "name": "entregable-5",
+  "name": "Pre-Entrega-2",
   "version": "1.0.0",
-  "description": "Entregable nro 5 Coderhouse",
+  "description": "Pre-Entrega nro 2 Coderhouse",
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/app.js",
