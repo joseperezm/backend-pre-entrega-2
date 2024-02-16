@@ -138,3 +138,19 @@ form {
     transition: transform .3s ease-in-out, box-shadow .3s ease-in-out;
     box-shadow: 0 0 11px rgba(33,33,33,.2);
 }
+
+.form-nav {
+    margin: 5px!important;
+}
+
+.navbar {
+    background-color: #008ba3;
+}
+
+.cartList {
+    background-color: #abbcca!important;
+}
+
+.upperBorder {
+    margin-top: 80px;  
+}

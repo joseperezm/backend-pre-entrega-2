@@ -1,13 +1,17 @@
-    <h1 class="mt-4">Carritos Actuales</h1>
-    <hr>
-    {{#if carts.length}}
+<h1 class="mt-4 mb-3 text-center">Carritos Actuales</h1>
+<hr>
+{{#if carts.length}}
     {{#each carts}}
-        <ul>
-            <li>ID: <a href="/carts/{{this._id}}">{{this._id}}</a></li>
-            <li>Fecha: {{this.date}}</li>
-        </ul>
-        {{/each}}
-    {{else}}
-        <p>No hay carritos disponibles.</p>
-    {{/if}}
-    <hr>
+        <div class="list-group mb-1 m-2">
+            <a href="/carts/{{this._id}}" class="cartList list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Carrito ID: {{this._id}}</h5>
+                    <small>Fecha: {{this.date}}</small>
+                </div>
+            </a>
+        </div>
+    {{/each}}
+{{else}}
+    <h5>No hay carritos disponibles...</h5>
+{{/if}}
+<hr>

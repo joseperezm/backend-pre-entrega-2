@@ -1,19 +1,24 @@
-<h1 class="mt-4">Detalles del Carrito</h1>
-<hr>
-<div>{{#if cart.products.length}}
-    <ul>
-        {{#each cart.products}}
-            <li>
-                <h2>{{this.productId.title}}</h2>
-                <p>{{this.productId.description}}</p>
-                <p>Cantidad: {{this.quantity}}</p>
-                <p>Precio: ${{this.productId.price}}</p>
-                <button class="delete-product-button btn btn-danger mt-4 mb-4" data-cart-id="{{../cart._id}}" data-product-id="{{this.productId._id}}">Eliminar del carrito</button>
-            </li>
-        {{/each}}
-    </ul>
-{{else}}
-    <p>El carrito está vacío.</p>
-{{/if}}<hr>
+<h1 class="mt-4 mb-3 text-center">Detalles del Carrito {{cart._id}}</h1>
+
+<div>
+    {{#if cart.products.length}}
+        <div class="list-group m-2">
+            {{#each cart.products}}
+                <div class="list-group-item cartList">
+                    <h2 class="h4">{{this.productId.title}}</h2>
+                    <p>{{this.productId.description}}</p>
+                    <p>Cantidad: <span class="badge bg-secondary">{{this.quantity}}</span></p>
+                    <p>Precio: <span class="text-muted">${{this.productId.price}}</span></p>
+                    <button class="delete-product-button btn btn-danger mt-2 mb-2" data-cart-id="{{../cart._id}}" data-product-id="{{this.productId._id}}">Eliminar del carrito</button>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+    <hr>
+        <h5 class="text-center m-5">El carrito está vacío...</h5>
+    <hr>
+    {{/if}}
 </div>
+
 <script src="/js/eliminarProducto.js"></script>
+
