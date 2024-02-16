@@ -12,7 +12,6 @@ const productSchema = new mongoose.Schema({
   status: { type: Boolean, default: true }
 });
 
-// Aplicar el plugin de paginación al esquema de producto
 productSchema.plugin(mongoosePaginate);
 
 const Product = mongoose.model('Product', productSchema);

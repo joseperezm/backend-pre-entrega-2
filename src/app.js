@@ -62,12 +62,9 @@ const Message = require('./dao/models/messages-mongoose.js');
 io.on('connection', (socket) => {
     console.log('Un usuario se ha conectado');
 
-   // Espera a recibir el correo electrónico del usuario
    socket.on('user email provided', (email) => {
     console.log(`Correo electrónico recibido: ${email}`);
-    // Aquí puedes agregar lógica adicional basada en el correo electrónico, si es necesario
     
-    // Después de recibir el correo electrónico, envía todos los mensajes
     Message.find().then(messages => {
         socket.emit('load all messages', messages); 
     });

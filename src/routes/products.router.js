@@ -10,19 +10,17 @@ const productManager = new ProductManager();
 router.get('/products', async (req, res) => {
     const limit = req.query.limit === undefined ? 10 : parseInt(req.query.limit, 10);
     const page = parseInt(req.query.page) || 1;
-    const sort = req.query.sort; // asc o desc
-    const query = req.query.query; // Búsqueda específica, podría ser categoría o disponibilidad
+    const sort = req.query.sort;
+    const query = req.query.query; 
     
     try {
-        // La lógica para aplicar filtros, ordenamiento y paginación deberá ser implementada en getProducts
         const { products, totalPages } = await productManager.getProducts({ limit, page, sort, query });
 
-        // Calcular prevPage, nextPage, hasPrevPage, hasNextPage, prevLink, nextLink
         const hasPrevPage = page > 1;
         const hasNextPage = page < totalPages;
         const prevPage = hasPrevPage ? page - 1 : null;
         const nextPage = hasNextPage ? page + 1 : null;
-        const baseUrl = '/products?'; // Asegúrate de construir los links prevLink y nextLink adecuadamente
+        const baseUrl = '/products?';
 
         res.json({
             status: "success",

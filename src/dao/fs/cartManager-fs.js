@@ -128,10 +128,8 @@ async getProductsFromFile() {
                 
                 if (productIndex !== -1) {
                     if (carts[cartIndex].products[productIndex].quantity > 1) {
-                        // Si la cantidad es mayor a 1, reducir la cantidad en 1
                         carts[cartIndex].products[productIndex].quantity--;
                     } else {
-                        // Si la cantidad es 1, eliminar el producto del carrito
                         carts[cartIndex].products.splice(productIndex, 1);
                     }
     

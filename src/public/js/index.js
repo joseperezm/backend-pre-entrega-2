@@ -56,14 +56,13 @@ const agregarProducto = () => {
         title: title,
         description: description,
         price: parseFloat(price),
-        thumbnails: thumbnails || "uploads/placeholder.jpg", // Usar placeholder si no se proporciona thumbnail
+        thumbnails: thumbnails || "uploads/placeholder.jpg",
         code: code,
         stock: parseInt(stock),
         category: category,
         status: status
     };
     
-    // Validación de campos obligatorios
     if (!title || !description || !code || !price || !stock || !category) {
         alert("Por favor, complete todos los campos obligatorios.");
         return;

@@ -43,11 +43,9 @@ router.get("/carts/:cid", async (req, res) => {
 
 router.post("/carts/:cid/product/:pid", async (req, res) => {
     const { cid, pid } = req.params;
-    // Obtiene la cantidad del cuerpo de la solicitud, con un valor predeterminado de 1 si no se proporciona
     const { quantity = 1 } = req.body;
 
     try {
-        // Pasa el parámetro quantity a addToCart
         const { success, message, cart } = await cartManager.addToCart(cid, pid, quantity);
         if (success) {
             res.json({ message: message, cart: cart });
@@ -62,7 +60,7 @@ router.post("/carts/:cid/product/:pid", async (req, res) => {
 
 router.put("/carts/:cid", async (req, res) => {
     const { cid } = req.params;
-    const { products } = req.body; // Asegurándonos de extraer correctamente el arreglo de productos
+    const { products } = req.body;
 
     try {
         const updatedCart = await cartManager.updateCartProducts(cid, products);

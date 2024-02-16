@@ -27,7 +27,6 @@ router.get("/products", async (req, res) => {
 
         const result = await productManager.getProducts(options);
         
-        // Asumiendo que 'getProducts' devuelve un objeto con la estructura esperada
         const productosObj = Array.isArray(result.products) ? result.products.map(producto => {
             return producto.toObject ? producto.toObject() : producto;
         }) : [];
@@ -40,9 +39,9 @@ router.get("/products", async (req, res) => {
             hasNextPage: result.hasNextPage,
             prevPage: result.prevPage,
             nextPage: result.nextPage,
-            limit: options.limit, // Se asegura de pasar el límite actual
-            sort: options.sort, // Pasa el parámetro 'sort' actual a la plantilla
-            query: options.query, // Pasa el parámetro 'query' actual si lo estás utilizando
+            limit: options.limit, 
+            sort: options.sort, 
+            query: options.query,
         });
     } catch (error) {
         console.error("Error al obtener productos", error);
@@ -67,13 +66,10 @@ router.get("/chat", (req, res) => {
 router.get("/carts", async (req, res) => {
     try {
         const carts = await cartManager.getAllCarts();
-        // Convertir cada documento de carrito a un objeto plano, si es necesario.
         const cartsObjects = carts.map(cart => cart.toObject ? cart.toObject() : cart);
-        // Renderiza una vista llamada 'cartsList' y pasa los datos de los carritos convertidos.
         res.render('carts', { carts: cartsObjects });
     } catch (error) {
         console.error("Error al obtener todos los carritos...", error);
-        // Renderiza una vista de error o maneja el error como prefieras.
         res.status(404).render('error', { message: "Error al intentar listar los carritos" });
     }
 });
@@ -84,16 +80,13 @@ router.get("/carts/:cid", async (req, res) => {
     try {
         const cart = await cartManager.getCart(req.params.cid);
         if (cart) {
-            // Convertir el documento Mongoose a un objeto si es necesario
             const cartObject = cart.toObject ? cart.toObject() : cart;
             res.render('cart', { cart: cartObject });
         } else {
-            // Si no se encuentra el carrito, renderiza la vista de error con estado 404
             res.status(404).render('error', { message: "Carrito no encontrado" });
         }
     } catch (error) {
         console.error("Error al obtener el carrito por ID...", error);
-        // Renderiza la vista de error con estado 404 para cualquier error
         res.status(404).render('error', { message: "Carrito no encontrado" });
     }
 });

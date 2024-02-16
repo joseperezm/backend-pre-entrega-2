@@ -8,7 +8,6 @@ Product.schema.plugin(mongoosePaginate);
 class ProductManager {
     constructor() {}
 
-    // Añadir un nuevo producto
     async addProduct(productData) {
         try {
             const product = new Product(productData);
@@ -20,15 +19,12 @@ class ProductManager {
         }
     }
 
-    // Obtener todos los productos
     async getProducts(opts = null) {
         try {
-            // Si no se pasan opciones, devuelve todos los productos
             if (!opts) {
                 return await Product.find({});
             }
     
-            // Desde aquí, el código maneja los casos con opciones de paginación, ordenación y filtrado
             const { limit, page = 1, sort = '', query = '' } = opts;
     
             let queryFilter = {};
@@ -53,8 +49,6 @@ class ProductManager {
                 sortOptions.price = sort === 'asc' ? 1 : -1;
             }
     
-            // Manejar el caso donde no se requiere paginación
-            // Esto se aplica cuando limit no se define o es 0
             if (limit === undefined || limit === 0) {
                 const docs = await Product.find(queryFilter).sort(sortOptions);
                 return {
@@ -67,7 +61,6 @@ class ProductManager {
                     nextPage: null,
                 };
             } else {
-                // Aplicar paginación solo si 'limit' y 'page' están definidos
                 const options = {
                     page,
                     limit,
@@ -90,8 +83,6 @@ class ProductManager {
         }
     }
              
-
-    // Obtener un producto por ID
     async getProductById(productId) {
         try {
             return await Product.findById(productId);
@@ -106,7 +97,6 @@ class ProductManager {
         }
     }
 
-    // Actualizar un producto por ID
     async updateProduct(productId, productData) {
         try {
             return await Product.findByIdAndUpdate(productId, productData, { new: true });
@@ -121,7 +111,6 @@ class ProductManager {
         }
     }
 
-    // Eliminar un producto por ID
     async deleteProduct(productId) {
         try {
             return await Product.findByIdAndDelete(productId);

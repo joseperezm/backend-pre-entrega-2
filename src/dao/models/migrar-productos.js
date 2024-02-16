@@ -6,10 +6,8 @@ mongoose.connect('mongodb+srv://coderhouse:ihOXSjjIqf0DM7xT@jjpm.envjeyh.mongodb
 .then(async () => {
   console.log('Conectado a MongoDB Atlas para la migración');
 
-  // Limpiar la colección de productos si es necesario
   await Product.deleteMany({});
 
-  // Insertar productos en la base de datos
   await Product.insertMany(productsData);
 
   console.log('Migración de productos completada');

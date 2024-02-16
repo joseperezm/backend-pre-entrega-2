@@ -13,8 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                // Aquí podrías recargar la página o eliminar el elemento del DOM para reflejar el cambio
-                window.location.reload(); // Recargar la página para ver los cambios
+                window.location.reload();
             })
             .catch(error => console.error('Error:', error));
         });
